@@ -12,12 +12,12 @@
 </div>
 
 {{-- carousel --}}
-<div id="carouselExampleCaptions" class="carousel slide mx-auto" style="width: 85%; height: 65vh;">
+<div id="carouselExampleCaptions" class="carousel slide mx-auto" style="width: 85%; height: 65vh; ">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
       <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
     </div>
-    <div class="carousel-inner" style="height: 55vh; position:relative; text-align: center; color: white;">
+    <div class="carousel-inner" style="height: 55vh; position:relative; text-align: center; color: white;border-radius: 8px;">
       <div class="carousel-item active" style="position: relative;">
         <img src="https://www.torntackies.com/wp-content/uploads/2022/05/Borobudur-Java.jpg" class="d-block w-100" alt="Borobudur Temple">
         <div class="overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.3);"></div>
@@ -48,44 +48,43 @@
     </button>
 </div>
 
-
 <div class="grid-container">
-    <div class="grid-item">
+  <div class="grid">
       <div class="card">
-        <div class="card-overlay">
-          <h3>TRENDING</h3>
-          <h2>Hidden Gems in Sumba</h2>
-          <button class="card-btn">See More</button>
-        </div>
+          <img src="https://www.sumbahospitalityfoundation.org/wp-content/uploads/2020/10/ratenggaro-village.jpg" alt="Sumba" class="card-img">
+          <div class="card-overlay">
+              <h3>TRENDING</h3>
+              <h2>Hidden Gems in Sumba</h2>
+              <button class="card-btn" href="/tour_details/{{ $t->3 }}">See More</button>
+          </div>
       </div>
-    </div>
-    <div class="grid-item">
       <div class="card">
-        <img src="image2.jpg" alt="Celebrate New Years with Us" class="card-img">
-        <div class="card-overlay">
-          <h3>UPCOMING</h3>
-          <h2>Celebrate New Years with Us</h2>
-          <button class="card-btn">See More</button>
-        </div>
+          <img src="https://www.agoda.com/wp-content/uploads/2024/11/Featured-image-New-Years-Eve-at-Puputan-Badung-Park-Denpasar-Bali-Indonesia-1244x700.jpg" alt="Celebrate New Years with Us" class="card-img">
+          <div class="card-overlay">
+              <h3>UPCOMING</h3>
+              <h2>Celebrate New Years with Us</h2>
+              <button class="card-btn" href="/tour_details/{{ $t->1 }}">See More</button>
+          </div>
       </div>
-    </div>
-    <div class="grid-item">
+  </div>
+</div>
+
+<div class = "grid-container">
+  <div class ="grid">
       <div class="card">
-        <img src="image3.jpg" alt="The Best Bali Couple Tours" class="card-img">
-        <div class="card-overlay">
-          <h3>FAVORITE</h3>
-          <h2>The Best Bali Couple Tours</h2>
-          <button class="card-btn">See More</button>
-        </div>
+          <img src="https://international.unud.ac.id/protected/storage/file_summernote/4a0885ebc3c02b217cbf6c079eca6b37.jpg" alt="The Best Bali Couple Tours" class="card-img">
+          <div class="card-overlay">
+              <h3>FAVORITE</h3>
+              <h2>The Best Bali Couple Tours</h2>
+              <button class="card-btn" href="/tour_details/{{ $t->2 }}">See More</button>
+          </div>
       </div>
-    </div>
-    <div class="grid-item">
-      <div class="card see-all">
-        <img src="image4.jpg" alt="See All" class="card-img">
-        <div class="card-overlay">
-          <h2>See All</h2>
-          <button class="card-btn">→</button>
-        </div>
+      <div class="card">
+          <img src="https://asset-2.tstatic.net/wartakota/foto/bank/images/20160101-raja-ampat_20160101_070036.jpg" alt="See All" class="card-img">
+          <div class="card-overlay">
+              <h2>See All</h2>
+              <button class="card-btn" href="/tour">→</button>
+          </div>
       </div>
     </div>
 </div>
@@ -103,33 +102,43 @@
         padding: 0;
     }
 
+/* Center the grid-container within the page */
     .grid-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-        padding: 30px;
-        justify-items: center;
+        display: flex;
+        justify-content: center; /* Centers horizontally */
+        align-items: center; /* Centers vertically */
+        width: 100%; /* Ensure it takes full width */
+        height: 300px; /* Make the container take the full height of the viewport */
+        margin-bottom: 20px; /* Add top margin if needed */
     }
 
-    .grid-item {
-        position: relative;
-        height: 350px; /* Increased the height to make the cards larger */
+    /* Grid styling to have 2 cards per row and keep them centered */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+        gap: 20px;
+        height: 300px;
+        justify-items: center; /* Centers the cards within the grid */
         width: 100%;
-        max-width: 400px;
+        max-width: 85%; /* Optional: limit the maximum width of the grid */
+    }
+
+    .card {
+        position: relative;
+        height: 300px;
+        width: 100%;
+        max-width: 100%; /* Ensures the cards don't stretch too wide */
         border-radius: 8px;
         overflow: hidden;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
+        display: flex;
+        flex-direction: column;
     }
 
-    .grid-item:hover {
-        transform: scale(1.05);
-    }
-
-    .card-img {
-        width: 100%;
+    .card img {
         height: 100%;
-        object-fit: cover;
+        width: 100%;
+        background-size: cover;
+        object-fit: cover; /* Ensures the image fills the space properly */
     }
 
     .card-overlay {
@@ -138,7 +147,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(128, 0, 0, 0.6);
+        background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -151,15 +160,12 @@
 
     .card-overlay h3 {
         font-size: 18px;
-        text-transform: uppercase;
         margin: 0;
     }
 
     .card-overlay h2 {
         font-size: 22px;
-        font-weight: 700;
-        margin: 80% 0 10px 0;
-        color: #821616;
+        margin-top: 10px;
     }
 
     .card-btn {
@@ -168,19 +174,24 @@
         border: none;
         padding: 10px 20px;
         font-size: 16px;
-        font-weight: bold;
         border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        margin-top: 10%;
-    }
-
-    .card-btn:hover {
-        background-color: #ddd;
+        margin-top: 20px;
     }
 
     .see-all .card-overlay {
         justify-content: center;
+        align-items: center;
     }
+
+    .card-overlay h2 {
+        font-size: 24px;
+        margin-top: 20px;
+    }
+
+    .card-btn {
+        margin-top: 20px;
+        font-size: 20px;
+    }
+
 
 </style>
