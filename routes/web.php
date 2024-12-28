@@ -29,6 +29,11 @@ Route::post('/bookTour/{tour_id}/{user_id}', [PageController::class, 'bookTour']
     ->where('user_id', '[0-9]+') // Ensure `id` is numeric
     ->name('bookTour');
 
+Route::get('/bookTour/{tour_id}/{user_id}', [PageController::class, 'bookTour'])
+    ->where('tour_id', '[0-9]+') // Ensure `id` is numeric
+    ->where('user_id', '[0-9]+') // Ensure `id` is numeric
+    ->name('bookTour');
+
 // Payment page
 Route::post('/bookTour/confirmBooking', [PageController::class, 'confirmBooking'])->name('confirmBooking');
 

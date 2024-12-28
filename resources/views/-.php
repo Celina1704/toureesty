@@ -58,6 +58,7 @@
                     </table>
 
                     <form action="#" method="POST">
+                        @csrf
                         <div class="mb-3">
                             <label for="quantity" class="form-label">Quantity</label>
                             <input type="number" id="quantity" name="quantity" class="form-control" value="1" min="1">

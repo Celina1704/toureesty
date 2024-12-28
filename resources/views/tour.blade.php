@@ -53,7 +53,16 @@
                             </div>
 
                             <!-- Book Now Button -->
-                            <a href="/tour_details/{{ $t->id }}" class="btn btn-sm" style="background-color: #821616; color: white; font-size: 16px;">See Details</a>
+
+                            @if (Auth::check())  <!-- Check if the user is logged in -->
+                                <form action="{{ url('bookTour/'.$tour->id.'/'.Auth::user()->id) }}" method="POST">
+                                    @csrf
+                                    <a href="/tour_details/{{ $t->id }}" class="btn btn-sm" style="background-color: #821616; color: white; font-size: 16px;">See Details</a>
+                                </form>
+                            @else
+                                <p>You must be logged in to book a tour. <a href="{{ route('login') }}">Log in</a></p>
+                            @endif
+                
                         </div>
 
                     </div>

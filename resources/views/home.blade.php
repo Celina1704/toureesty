@@ -55,7 +55,7 @@
           <div class="card-overlay">
               <h3>TRENDING</h3>
               <h2>Hidden Gems in Sumba</h2>
-              <button class="card-btn" href="/tour_details/{{ $t->3 }}">See More</button>
+              <a class="card-btn" href="{{ route('tour')}}">See More</a>
           </div>
       </div>
       <div class="card">
@@ -63,7 +63,7 @@
           <div class="card-overlay">
               <h3>UPCOMING</h3>
               <h2>Celebrate New Years with Us</h2>
-              <button class="card-btn" href="/tour_details/{{ $t->1 }}">See More</button>
+              <a class="card-btn" href="{{ route('tour')}}">See More</a>
           </div>
       </div>
   </div>
@@ -76,14 +76,14 @@
           <div class="card-overlay">
               <h3>FAVORITE</h3>
               <h2>The Best Bali Couple Tours</h2>
-              <button class="card-btn" href="/tour_details/{{ $t->2 }}">See More</button>
+              <a class="card-btn" href="{{ route('tour')}}">See More</a>
           </div>
       </div>
       <div class="card">
           <img src="https://asset-2.tstatic.net/wartakota/foto/bank/images/20160101-raja-ampat_20160101_070036.jpg" alt="See All" class="card-img">
           <div class="card-overlay">
               <h2>See All</h2>
-              <button class="card-btn" href="/tour">→</button>
+              <a class="card-btn" href="{{ route('tour')}}">→</a>
           </div>
       </div>
     </div>
