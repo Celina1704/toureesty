@@ -1,6 +1,6 @@
 @extends('navbarfooter')
 @section('title', 'About Us')
-<!-- haha -->
+
 @section('content')
 <div class="about-us-container">
     <div class="hero-section text-white bg-dark-red">
