@@ -55,7 +55,7 @@
                             <!-- Book Now Button -->
 
                             @if (Auth::check())  <!-- Check if the user is logged in -->
-                                <form action="{{ url('bookTour/'.$tour->id.'/'.Auth::user()->id) }}" method="POST">
+                                <form action="{{ url('bookTour/'.$t->id.'/'.Auth::user()->id) }}" method="POST">
                                     @csrf
                                     <a href="/tour_details/{{ $t->id }}" class="btn btn-sm" style="background-color: #821616; color: white; font-size: 16px;">See Details</a>
                                 </form>
