@@ -55,36 +55,52 @@ class PageController extends Controller
         return view('editProfile', ['profile'=>$profile]);
     }
 
-    public function updateProfile(Request $request, $id){
-        $profile = User::find($id);
-        // Check if 'name' is not empty and update it
-        if (!empty($request->input('name'))) {
-            $profile->name = $request->input('name');
+    public function updateProfile(Request $request, $id)
+    {
+        // Validate the request data
+        $validatedData = $request->validate([
+            'name' => 'nullable|string|max:255',
+            'email' => 'nullable|email|unique:users,email,' . $id, // Allow current email
+            'password' => 'nullable|min:8|confirmed', // Add password validation if updating password
+            'phone' => 'nullable|string|max:15|regex:/^[0-9]{10,15}$/', // Numeric-only validation
+            'birthday' => [
+                'nullable',
+                'date',
+                'before:today',
+                function ($attribute, $value, $fail) {
+                    if ($value) {
+                        $age = \Carbon\Carbon::parse($value)->age;
+                        if ($age < 18) {
+                            $fail('You must be at least 18 years old to update your profile.');
+                        }
+                    }
+                }
+            ],
+            'gender' => 'nullable|in:Male,Female,Other',
+        ], [
+            'email.unique' => 'This email is already taken.',
+            'phone.regex' => 'The phone number must be numeric and between 10 and 15 digits.',
+            'birthday.before' => 'The birthday must be a date before today.',
+            'gender.in' => 'The gender must be Male, Female, or Other.',
+            'password.min' => 'The password must be at least 8 characters long.',
+            'password.confirmed' => 'Passwords do not match.',
+        ]);
+
+        // Find the user
+        $profile = User::findOrFail($id);
+
+        // Update only the fields that are present in the request
+        $profile->fill($validatedData);
+
+        // If password is provided, hash it and update
+        if ($request->filled('password')) {
+            $profile->password = Hash::make($validatedData['password']);
         }
 
-        // Check if 'phone' is not empty and update it
-        if (!empty($request->input('phone'))) {
-            $profile->phone = $request->input('phone');
-        }
-
-        // Check if 'email' is not empty and update it
-        if (!empty($request->input('email'))) {
-            $profile->email = $request->input('email');
-        }
-
-        // Check if 'birthday' is not empty and update it
-        if (!empty($request->input('birthday'))) {
-            $profile->birthday = $request->input('birthday');
-        }
-
-        // Check if 'gender' is not empty and update it
-        if (!empty($request->input('gender'))) {
-            $profile->gender = $request->input('gender');
-        }
-
+        // Save the profile
         $profile->save();
 
-        return redirect()->route('profile', ['id'=>$id])->with('success', 'Profile updated successfully.');
+        return redirect()->route('profile', ['id' => $id])->with('success', 'Profile updated successfully.');
     }
 
     // public function profile($customerId){
